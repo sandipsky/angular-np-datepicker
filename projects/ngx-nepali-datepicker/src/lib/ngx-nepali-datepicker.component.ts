@@ -62,8 +62,7 @@ export class NgxNepaliDatepickerComponent
   @Input() hasMultipleCalendarView = true;
   @Input() calendarView: string = "BS";
 
-  @Output() dateInAD: EventEmitter<string> = new EventEmitter();
-  @Output() dateInBS: EventEmitter<string> = new EventEmitter();
+  @Output() dateChange: EventEmitter<string> = new EventEmitter();
 
   public nepaliDateToday: DateObj = { day: 0, month: 0, year: 0 };
   public englishDateToday: DateObj = { day: 0, month: 0, year: 0 };
@@ -99,7 +98,21 @@ export class NgxNepaliDatepickerComponent
       selectedDate.month < 9
         ? '0' + (selectedDate.month + 1)
         : selectedDate.month + 1;
-    return `${this.selectedDate.year}/${mm}/${dd}`;
+    
+    let date = `${this.selectedDate.year}/${mm}/${dd}`
+    if(this.dateFormat == 'dd-mm-yyyy')
+    {
+      date = `${dd}-${mm}-${this.selectedDate.year}`
+    }
+    else if(this.dateFormat == 'dd/mm/yyyy')
+    {
+      date = `${dd}/${mm}/${this.selectedDate.year}`
+    }
+    else if(this.dateFormat == 'yyyy-mm-dd')
+    {
+      date = `${this.selectedDate.year}-${mm}-${dd}`
+    }
+    return date;
   };
 
   initialized: boolean = false;
@@ -507,8 +520,7 @@ export class NgxNepaliDatepickerComponent
       this.selectedYear = this.currentDate.getFullYear();
     }
     this.formatValue();
-    this.emitDateInAD();
-    this.emitDateInBS();
+    this.emitDate();
     this.close();
   }
 
@@ -636,35 +648,8 @@ export class NgxNepaliDatepickerComponent
     this.isOpen = false;
   }
 
-  private emitDateInAD() {
-    const dateInAD = this._nepaliDate.nepToEngDate(
-      this.selectedDate.day,
-      this.selectedDate.month,
-      this.selectedDate.year
-    );
-    const defaultFormatDate = this._datePipe.transform(
-      dateInAD,
-      "YYYY/MM/dd'T'hh:mm:ss'Z'zzzz"
-    );
-    this.selectedTimeWithTimezone = defaultFormatDate?.substring(
-      defaultFormatDate.indexOf('T')
-    );
-
-    const dateAD = defaultFormatDate?.split('T')[0];
-    if (!dateAD) return;
-    const formattedDate = this._nepaliDate.formatDate(dateAD, this.dateFormat);
-    const formattedDateEnglish = this._dateService.BSToAD(formattedDate,this.dateFormat);
-    const dateToReturn = this.setDateWithTime(formattedDateEnglish);
-    this.dateInAD.emit(dateToReturn);
-  }
-
-  private emitDateInBS() {
-    const formattedDate = this._nepaliDate.formatDate(
-      this.formattedDate,
-      this.dateFormat
-    );
-    const dateToReturn = this.setDateWithTime(formattedDate);
-    this.dateInBS.emit(dateToReturn);
+  private emitDate() {
+    this.calendarView == 'BS' ? this.dateChange.emit(this.formattedDate) : this.dateChange.emit(this.formattedDateEnglish);
   }
 
   private setDateWithTime(date: string) {
