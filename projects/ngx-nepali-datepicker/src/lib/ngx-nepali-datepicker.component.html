@@ -10,7 +10,7 @@
       'np_datepicker_input--active': isOpen
     }"
     type="text"
-    [value]="formattedDate"
+    [value]="calendarView == 'BS' ? formattedDate : formattedDateEnglish"
     (focus)="open()"
     (keydown)="$event.preventDefault()"
     aria-hidden="true"
