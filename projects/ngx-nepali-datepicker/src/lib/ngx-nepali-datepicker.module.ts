@@ -10,12 +10,12 @@ import { ConfigType } from './interface/interface';
   providers: [DatePipe],
   exports: [NgxNepaliDatepickerComponent],
 })
-export class NepaliDatepickerModule {
+export class NgxNepaliDatepickerModule {
   static forRoot(
     config: ConfigType
-  ): ModuleWithProviders<NepaliDatepickerModule> {
+  ): ModuleWithProviders<NgxNepaliDatepickerModule> {
     return {
-      ngModule: NepaliDatepickerModule,
+      ngModule: NgxNepaliDatepickerModule,
       providers: [
         {
           provide: 'config',

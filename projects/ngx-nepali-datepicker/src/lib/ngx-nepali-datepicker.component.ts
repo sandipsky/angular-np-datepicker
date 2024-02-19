@@ -29,13 +29,13 @@ import {
 import { NepaliDatepickerAngularPrivateService } from './services/nepali-datepicker-angular-private.service';
 import { DatePipe } from '@angular/common';
 import { englishLeapMonths, englishMonths } from './constants/data';
-import { NepaliDatepickerService } from './services/nepali-datepicker-angular.service';
+import { NgxNepaliDatepickerService } from './services/nepali-datepicker-angular.service';
 type DateFormatType = 'yyyy/mm/dd' | 'dd/mm/yyyy' | 'yyyy-mm-dd' | 'dd-mm-yyyy';
 type Language = 'en' | 'ne';
 type MonthDisplayType = 'default' | 'short';
 type DateIn = 'AD' | 'BS';
 @Component({
-  selector: 'ne-datepicker',
+  selector: 'np-datepicker',
   templateUrl: `ngx-nepali-datepicker.component.html`,
   styleUrls: ['ngx-nepali-datepicker.component.scss'],
   encapsulation: ViewEncapsulation.None,
@@ -60,7 +60,7 @@ export class NgxNepaliDatepickerComponent
   @Input() dateFormat: DateFormatType = 'yyyy/mm/dd';
   @Input() monthDisplayType: MonthDisplayType = 'default';
   @Input() hasMultipleCalendarView = true;
-  @Input() calendarView: DateIn = "BS";
+  @Input() calendarView: string = "BS";
 
   @Output() dateInAD: EventEmitter<string> = new EventEmitter();
   @Output() dateInBS: EventEmitter<string> = new EventEmitter();
@@ -113,7 +113,7 @@ export class NgxNepaliDatepickerComponent
 
   constructor(
     public _nepaliDate: NepaliDatepickerAngularPrivateService,
-    private _dateService: NepaliDatepickerService,
+    private _dateService: NgxNepaliDatepickerService,
     private eRef: ElementRef,
     private _datePipe: DatePipe,
     @Optional() @Inject('config') config: ConfigType
@@ -124,6 +124,7 @@ export class NgxNepaliDatepickerComponent
     this.currentDate = new Date();
     this.setEnglishCurrentDate();
     this.setNepaliCurrentDate();
+    this.selectCalendarView(this.calendarView)
     this.nepaliDateToday = _nepaliDate.engToNepDate(
       this.currentDate.getDate(),
       this.currentDate.getMonth(),
@@ -673,9 +674,8 @@ export class NgxNepaliDatepickerComponent
     return `${date}${this.selectedTimeWithTimezone}`;
   }
 
-  public selectCalendarView(data: any) {
-    const type = data.target.value;
-    this.calendarView = type;
+  public selectCalendarView(data: any, isSelect?:any) {
+    this.calendarView = isSelect ? data.target.value : data;
     this.populateYears();
     this.monthsMapping =
       this.calendarView === 'BS' ? monthsMapping : englishMonthMapping;

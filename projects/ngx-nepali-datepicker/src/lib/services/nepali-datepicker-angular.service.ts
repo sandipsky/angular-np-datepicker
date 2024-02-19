@@ -4,7 +4,7 @@ type DateFormat = 'yyyy/mm/dd' | 'dd/mm/yyyy' | 'yyyy-mm-dd' | 'dd-mm-yyyy';
 @Injectable({
   providedIn: 'root',
 })
-export class NepaliDatepickerService {
+export class NgxNepaliDatepickerService {
   constructor(
     private _datePicketService: NepaliDatepickerAngularPrivateService
   ) {}
@@ -49,7 +49,7 @@ export class NepaliDatepickerService {
     );
   }
 
-  private formatDate(
+  formatDate(
     date: { day: number; month: number; year: number },
     format: string
   ) {
@@ -62,6 +62,25 @@ export class NepaliDatepickerService {
     format = format.replace(regex.month, this.zeroPad(date.month + 1, 2));
     format = format.replace(regex.day, this.zeroPad(date.day, 2));
     return format;
+  }
+
+  getTodayDate(format: DateFormat = 'yyyy-mm-dd') {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+    const day = String(today.getDate()).padStart(2, '0');
+
+    const formattedDate = `${year}/${month}/${day}`;
+    return this.ADToBS(formattedDate, format);
+  }
+
+  getTodayEnglishDate(format: DateFormat = 'yyyy-mm-dd') {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+    const day = String(today.getDate()).padStart(2, '0');
+    const formattedDate = this.formatDate({day:Number(day), month:Number(month), year:Number(year)}, format);
+    return formattedDate;
   }
 
   private zeroPad(num: number, places: number) {

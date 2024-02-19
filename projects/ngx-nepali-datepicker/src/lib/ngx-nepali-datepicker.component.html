@@ -78,7 +78,7 @@
       >
         <select
           class="datepicker__container__select"
-          (change)="selectCalendarView($event)"
+          (change)="selectCalendarView($event,true)"
         >
           <option
             *ngFor="let type of calendarType"
