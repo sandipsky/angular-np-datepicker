@@ -137,7 +137,7 @@ export class NgxNepaliDatepickerComponent
     this.currentDate = new Date();
     this.setEnglishCurrentDate();
     this.setNepaliCurrentDate();
-    this.selectCalendarView(this.calendarView)
+    this.selectCalendarView(this.calendarView);
     this.nepaliDateToday = _nepaliDate.engToNepDate(
       this.currentDate.getDate(),
       this.currentDate.getMonth(),
@@ -176,7 +176,7 @@ export class NgxNepaliDatepickerComponent
       this.setDatepickerColor();
     }
     if (changes['calendarView'] && this.calendarView) {
-      this.selectCalendarView(this.calendarView);
+      this.selectCalendarView(this.calendarView,false);
     }
   }
 
@@ -660,7 +660,7 @@ export class NgxNepaliDatepickerComponent
   }
 
   public selectCalendarView(data: any, isSelect?:any) {
-    this.calendarView = isSelect ? data.target.value : data;
+    this.calendarView = isSelect == true ? data.target.value : data;
     this.populateYears();
     this.monthsMapping =
       this.calendarView === 'BS' ? monthsMapping : englishMonthMapping;
@@ -689,6 +689,7 @@ export class NgxNepaliDatepickerComponent
         day: 1,
       };
     }
+    isSelect != undefined ? this.emitDate() : null;
     this.setCurrentMonthData();
   }
 
