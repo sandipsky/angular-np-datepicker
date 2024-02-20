@@ -54,7 +54,7 @@ On component to use
 
 | Input  | Type | Default | Description |
 | ------------- | ------------- | ------------- | ------------- |
-| (dateChange)  | Fired when a date is selected|
+| date  | string| -| Date value in string in format 'yyyy/mm/dd' or specific formate specify in 'dateFormat' property.|
 
 ### Outputs
 
