@@ -4,7 +4,7 @@ An Angular Datepicker Library with both AD and BS calendar.
 ## Installation
 
 ```script
-npm i nepali-datepicker-angular
+npm install ngx-nepali-datepicker
 ```
 ## Version support
 
