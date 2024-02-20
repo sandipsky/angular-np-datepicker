@@ -52,6 +52,9 @@ On component to use
 | darkTheme	| boolean	| false	| Flag to set dark theme or light theme for the datepicker view. |
 | calendarView	| string	| BS	| Default Calendar View. |
 
+| Input  | Type | Default | Description |
+| ------------- | ------------- | ------------- | ------------- |
+| (dateChange)  | Fired when a date is selected|
 
 ### Outputs
 
