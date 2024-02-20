@@ -54,12 +54,17 @@ On component to use
 
 | Input  | Type | Default | Description |
 | ------------- | ------------- | ------------- | ------------- |
-| date  | string| -| Date value in string in format 'yyyy/mm/dd' or specific formate specify in 'dateFormat' property.|
-| dateIn  | string| BS| Date format used for above Input Date if not specified converts given date to BS date equivalent.|
-| dateFormat  | string| yyyy/mm/dd| Date format for date property and also used for the output date format|
-| minDate  | Date| -| Minimum selectable date in `AD`.|
-| maxDate  | Date| -| Maximum selectable date in `AD`.|
-| language  | string| ne| Language for the datepicker view. Accept only `ne`(Nepali) or `en`(English).|
+| date  | `string`| -| Date value in `string`.|
+| dateIn  | `string`| BS| Date format used for above Input Date if not specified converts given date to `BS` date equivalent. Accepts `BS` or `AD`.|
+| dateFormat  | `string`| yyyy/mm/dd| Date format used for the output.|
+| minDate  | `Date`| -| Minimum selectable date in `AD`.|
+| maxDate  | `Date`| -| Maximum selectable date in `AD`.|
+| language  | `string`| ne| Language for the datepicker view. Accept only `ne`(Nepali) or `en`(English).|
+| placeholder  | `string`| Enter Date| Placeholder value to display.|
+| hasMultipleCalendarView  | `boolean`| `true`| Allow to switch datepicker with `AD` and `BS` date type.|
+| isError  | `boolean`| `false`| Flag to indicate error state and show error outline.|
+| primaryColor  | `string`| -| Color value for datepicker primary color. Accept string color name or the hex color value.|
+
 
 ### Outputs
 
