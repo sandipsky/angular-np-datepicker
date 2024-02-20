@@ -61,6 +61,7 @@ export class NgxNepaliDatepickerComponent
   @Input() monthDisplayType: MonthDisplayType = 'default';
   @Input() hasMultipleCalendarView = true;
   @Input() calendarView: string = "BS";
+  @Input() showIcon: boolean = true;
 
   @Output() dateChange: EventEmitter<string> = new EventEmitter();
 

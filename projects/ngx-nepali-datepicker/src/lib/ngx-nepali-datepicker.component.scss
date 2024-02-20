@@ -1,30 +1,24 @@
 
 .nepali-date-picker {
   --ne-datepicker-primary-color: #1d49e7;
-
   position: relative;
   display: inline-block;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 1em;
   width: 100%;
-  a.active {
-    svg {
-      fill: var(--ne-datepicker-primary-color);
-      opacity: 0.9;
-    }
-  }
-  .form-icon svg {
+ 
+  .form-icon {
     width: 14px;
     opacity: 0.3;
     position: absolute;
     right: 8px;
-    top: 12px;
+    top: 50%;
+    transform: translateY(-50%);
     cursor: pointer;
   }
 
   .datepicker {
     &__container {
       border: 1px solid #eee;
+      border-radius: 6px;
       background: #fff;
       width: 294px;
       box-shadow: rgba(10, 10, 15, 0.2) 0px 7px 29px 0px;
@@ -57,6 +51,8 @@
       display: flex;
       justify-content: space-evenly;
       background-color: var(--ne-datepicker-primary-color);
+      border-top-left-radius: 6px;
+      border-top-right-radius: 6px;
       color: #fff;
       line-height: 25px;
       font-size: 1em;
@@ -120,16 +116,10 @@
     box-sizing: border-box;
     width: inherit;
     border: 1px solid #eee;
-    padding: 10px;
-    font-size: 14px;
+    padding: 6px;
     color: #777;
-    border-radius: 8px;
-    height: 40px;
-    &--active,
-    &:focus,
-    &:hover {
-      outline: 1px solid var(--ne-datepicker-primary-color);
-    }
+    outline: none;
+    border-radius: 3.2px;
 
     &--error:not(.np_datepicker_input:hover):not(.np_datepicker_input:focus) {
       border-color: #ef4444;
@@ -222,13 +212,6 @@ Dark Theme
     }
     &__weekday {
       border-color: #555;
-    }
-  }
-  .np_datepicker_input {
-    &--active,
-    &:focus,
-    &:hover {
-      outline: 1px solid #000;
     }
   }
 }

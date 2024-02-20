@@ -50,6 +50,7 @@ On component to use
 | primaryColor  | `string`| -| Color value for datepicker primary color. Accept string color name or the hex color value.|
 | darkTheme  | `boolean`| `false`| Flag to set dark theme or light theme for the datepicker view.|
 | calendarView  | `string`| `BS`| Default Calendar Type. Accepts `BS` or `AD`.|
+| showIcon  | `boolean`| `true`| Show or Hide the Datepicker Icon.|
 
 
 
