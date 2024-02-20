@@ -55,6 +55,11 @@ On component to use
 | Input  | Type | Default | Description |
 | ------------- | ------------- | ------------- | ------------- |
 | date  | string| -| Date value in string in format 'yyyy/mm/dd' or specific formate specify in 'dateFormat' property.|
+| dateIn  | string| BS| Date format used for above Input Date if not specified converts given date to BS date equivalent.|
+| dateFormat  | string| yyyy/mm/dd| Date format for date property and also used for the output date format|
+| minDate  | Date| -| Minimum selectable date in `AD`.|
+| maxDate  | Date| -| Maximum selectable date in `AD`.|
+| language  | string| ne| Language for the datepicker view. Accept only `ne`(Nepali) or `en`(English).|
 
 ### Outputs
 
