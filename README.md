@@ -10,7 +10,7 @@ npm i nepali-datepicker-angular
 
 Angular 14+
 
-## usages
+## Usage
 
 On app.module.ts
 
@@ -29,7 +29,7 @@ import { NgxNepaliDatepickerModule } from 'ngx-nepali-datepicker';
 On component to use
 
 ```html
-<ne-datepicker [date]="date" dateIn="AD" calendarView="BS" (dateChange)="onDateChange($event)"> </ne-datepicker>
+<np-datepicker [date]="date" dateIn="AD" calendarView="BS" (dateChange)="onDateChange($event)"> </np-datepicker>
 ```
 
 [Link](https://www.npmjs.com/package/ngx-nepali-datepicker) to NPM package.
