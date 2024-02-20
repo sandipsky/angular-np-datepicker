@@ -1,27 +1,60 @@
-# AngularNpDatepicker
+# NgxNepaliDatepicker
+An Angular Datepicker Library with both AD and BS calendar.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.1.2.
+## Installation
 
-## Development server
+```script
+npm i nepali-datepicker-angular
+```
+## Version support
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Angular 14+
 
-## Code scaffolding
+## usages
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+On app.module.ts
 
-## Build
+```Typescript
+import { NgxNepaliDatepickerModule } from 'ngx-nepali-datepicker';
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+@NgModule({
+  declarations: [...],
+  imports: [..., NgxNepaliDatepickerModule, ...],
+  providers: [...],
+  bootstrap: [...],
+})
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+On component to use
 
-## Running end-to-end tests
+```html
+<ne-datepicker [date]="date" dateIn="AD" calendarView="BS" (dateChange)="onDateChange($event)"> </ne-datepicker>
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+[Link](https://www.npmjs.com/package/ngx-nepali-datepicker) to NPM package.
 
-## Further help
+## Documentation
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### Inputs
+| Input  | Type | Default | Description |
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| date	| string	| -	| Date value in string in format 'yyyy/mm/dd' or specific formate specify in 'dateFormat' property.
+| dateFormat	| string	| yyyy/mm/dd	| Date format for date property and also used for the output date format
+| dateIn	| string	| BS	| Date type of the given date input. Accepts `BS` or `AD`.
+| minDate	| Date	| -	| Minimum selectable date in `AD`.
+| maxDate	| Date	| -	| Maximum selectable date in `AD`.
+| language	| string	|ne	| Language for the datepicker view. Accept only `ne`(Nepali) or `en`(English)
+| Placeholder	| string	| Enter date	Placeholder value to display
+| hasMultipleCalendarView	| boolean	|True	| Allow to switch datepicker with `AD` and `BS` date type
+| isError	| boolean	| false	| Flag to indicate error state and show error outline
+| primaryColor	| string	| -	| Color value for datepicker primary color. Accept string color name or the hex color value.
+| darkTheme	| boolean	| false	| Flag to set dark theme or light theme for the datepicker view.
+
+
+### Outputs
+
+| Output  | Description |
+| ------------- | ------------- |
+| (dateChange)  | Fired when a date is selected|
+
