@@ -35,14 +35,13 @@ type Language = 'en' | 'ne';
 type MonthDisplayType = 'default' | 'short';
 type DateIn = 'AD' | 'BS';
 @Component({
-  selector: 'np-datepicker',
+  selector: 'np-datepicker, ne-datepicker',
   templateUrl: `ngx-nepali-datepicker.component.html`,
   styleUrls: ['ngx-nepali-datepicker.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
 export class NgxNepaliDatepickerComponent
-  implements OnInit, OnChanges, AfterViewInit
-{
+  implements OnInit, OnChanges, AfterViewInit {
   @ViewChild('nepaliDatePicker') nepaliDatePicker!: ElementRef<HTMLDivElement>;
   @Input()
   primaryColor!: string;
@@ -54,6 +53,7 @@ export class NgxNepaliDatepickerComponent
   @Input() isError = false;
   @Input() darkTheme = false;
   @Input() date!: string;
+  @Input() mode!: string;
   @Input() appendTime = false;
   @Input() maxDate!: Date;
   @Input() minDate!: Date;
@@ -64,6 +64,8 @@ export class NgxNepaliDatepickerComponent
   @Input() showIcon: boolean = true;
 
   @Output() dateChange: EventEmitter<string> = new EventEmitter();
+  @Output() dateInBS: EventEmitter<string> = new EventEmitter();
+  @Output() dateInAD: EventEmitter<string> = new EventEmitter();
 
   public nepaliDateToday: DateObj = { day: 0, month: 0, year: 0 };
   public englishDateToday: DateObj = { day: 0, month: 0, year: 0 };
@@ -99,18 +101,15 @@ export class NgxNepaliDatepickerComponent
       selectedDate.month < 9
         ? '0' + (selectedDate.month + 1)
         : selectedDate.month + 1;
-    
+
     let date = `${this.selectedDate.year}/${mm}/${dd}`
-    if(this.dateFormat == 'dd-mm-yyyy')
-    {
+    if (this.dateFormat == 'dd-mm-yyyy') {
       date = `${dd}-${mm}-${this.selectedDate.year}`
     }
-    else if(this.dateFormat == 'dd/mm/yyyy')
-    {
+    else if (this.dateFormat == 'dd/mm/yyyy') {
       date = `${dd}/${mm}/${this.selectedDate.year}`
     }
-    else if(this.dateFormat == 'yyyy-mm-dd')
-    {
+    else if (this.dateFormat == 'yyyy-mm-dd') {
       date = `${this.selectedDate.year}-${mm}-${dd}`
     }
     return date;
@@ -177,7 +176,7 @@ export class NgxNepaliDatepickerComponent
       this.setDatepickerColor();
     }
     if (changes['calendarView'] && this.calendarView) {
-      this.selectCalendarView(this.calendarView,false);
+      this.selectCalendarView(this.calendarView, false);
     }
   }
 
@@ -357,7 +356,7 @@ export class NgxNepaliDatepickerComponent
   private formatValue() {
     if (this.selectedDate) {
       this.formattedDate = this.dateFormatter(this.selectedDate);
-      this.formattedDateEnglish = this._dateService.BSToAD(this.formattedDate,this.dateFormat);
+      this.formattedDateEnglish = this._dateService.BSToAD(this.formattedDate, this.dateFormat);
     }
   }
 
@@ -422,7 +421,7 @@ export class NgxNepaliDatepickerComponent
     this.setMonthDataBefore(day - 1, this.currentNepaliDate.day - 1);
     let currentMonthMaxValue =
       this._nepaliDate.nepaliMonths[this.currentNepaliDate.year - 2000][
-        this.currentNepaliDate.month
+      this.currentNepaliDate.month
       ];
 
     this.setMonthDataAfter(
@@ -434,8 +433,7 @@ export class NgxNepaliDatepickerComponent
 
   private fillEnglishCalendar() {
     const day = new Date(
-      `${this.englishCurrentDate.year}/${this.englishCurrentDate.month + 1}/${
-        this.englishCurrentDate.day || 1
+      `${this.englishCurrentDate.year}/${this.englishCurrentDate.month + 1}/${this.englishCurrentDate.day || 1
       }`
     ).getDay();
     const currentEnglishDate = this.englishCurrentDate.day;
@@ -650,7 +648,14 @@ export class NgxNepaliDatepickerComponent
   }
 
   private emitDate() {
-    this.calendarView == 'BS' ? this.dateChange.emit(this.formattedDate) : this.dateChange.emit(this.formattedDateEnglish);
+    if (this.calendarView == 'BS') {
+      this.dateChange.emit(this.formattedDate);
+      this.dateInBS.emit(this.formattedDate);
+    }
+    else {
+      this.dateChange.emit(this.formattedDateEnglish);
+      this.dateInAD.emit(this.formattedDateEnglish);
+    }
   }
 
   private setDateWithTime(date: string) {
@@ -660,7 +665,7 @@ export class NgxNepaliDatepickerComponent
     return `${date}${this.selectedTimeWithTimezone}`;
   }
 
-  public selectCalendarView(data: any, isSelect?:any) {
+  public selectCalendarView(data: any, isSelect?: any) {
     this.calendarView = isSelect == true ? data.target.value : data;
     this.populateYears();
     this.monthsMapping =
