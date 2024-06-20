@@ -1,10 +1,9 @@
-
 .nepali-date-picker {
   --ne-datepicker-primary-color: #1d49e7;
   position: relative;
   display: inline-block;
   width: 100%;
- 
+
   .form-icon {
     width: 14px;
     opacity: 0.3;
@@ -13,6 +12,12 @@
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
+  }
+
+  &.calendar {
+    width: 100% !important;
+    position: static !important;
+    background: transparent !important;
   }
 
   .datepicker {
@@ -29,13 +34,16 @@
         border: none;
         color: #fff;
         background: none;
+        padding: 6px 0px;
         font-size: inherit;
+
         &:focus-visible {
           outline: none;
         }
 
         option {
           color: #333;
+
           &:checked,
           &:hover {
             background-color: var(--ne-datepicker-primary-color);
@@ -57,32 +65,38 @@
       line-height: 25px;
       font-size: 1em;
     }
+
     &__days-container {
       display: flex;
       justify-content: center;
       color: #777;
     }
+
     &__days {
       text-align: center;
       padding-bottom: 10px;
     }
+
     &__weekday {
       padding: 8px;
       font-weight: bold;
       border-bottom: 1px solid #eee;
       margin-bottom: 14px;
     }
+
     &__date-container {
       width: 40px;
       height: 40px;
       line-height: 40px;
       margin: 8px 0;
     }
+
     &__date-container {
       div {
         height: 100%;
       }
     }
+
     &__date {
       cursor: pointer;
       border-radius: 50%;
@@ -167,12 +181,16 @@ Dark Theme
       background-color: #000;
       color: #fff;
     }
+
     &__container {
       background: #333;
+
       &__select {
         color: #fff;
+
         option {
           color: #333;
+
           &:checked {
             background-color: #333;
             color: #fff;
@@ -180,6 +198,7 @@ Dark Theme
         }
       }
     }
+
     &__date {
       &--current-day {
         border: none;
@@ -188,6 +207,7 @@ Dark Theme
         height: 100%;
         background-color: #555;
       }
+
       &--active {
         background-color: #000;
         color: #fff;
@@ -195,9 +215,11 @@ Dark Theme
         //   color: #fff;
         // }
       }
+
       &--disabled {
         background: #222;
       }
+
       &:hover:not(.datepicker__date--active) {
         background-color: #222;
         color: #fff;
@@ -207,12 +229,13 @@ Dark Theme
     &__days {
       background-color: #333;
     }
+
     &__days-container {
       color: #aaa;
     }
+
     &__weekday {
       border-color: #555;
     }
   }
 }
-
