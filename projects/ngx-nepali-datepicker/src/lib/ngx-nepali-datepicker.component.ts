@@ -91,7 +91,7 @@ export class NgxNepaliDatepickerComponent
   public daysMapping: DaysMapping = daysMapping;
   public monthsMapping: MonthMapping = monthsMapping;
   public isOpen = false;
-  public calendarType = CalendarFormat.ne;
+  public calendarType = CalendarFormat.en;
   public dayDisplayType: 'default' | 'short' = 'short';
   public selectedMonthIndex: number;
   public selectedYear: number;

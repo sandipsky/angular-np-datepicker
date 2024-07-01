@@ -26,7 +26,7 @@
 
       <span class="datepicker__options-month-container">
         <select class="datepicker__container__select" (change)="selectMonth($event)">
-          <option *ngFor="
+          <option style="padding: 6px 0px;" *ngFor="
               let month of monthsMapping[language][monthDisplayType];
               index as i
             " [value]="month" [selected]="i === selectedMonthIndex">
@@ -36,14 +36,14 @@
       </span>
       <span class="datepicker__options-year-container">
         <select class="datepicker__container__select" (change)="selectYear($event)">
-          <option *ngFor="let year of years; index as i" [value]="year" [selected]="year === selectedYear">
+          <option style="padding: 6px 0px;" *ngFor="let year of years; index as i" [value]="year" [selected]="year === selectedYear">
             {{ year | toNp : language : "number" }}
           </option>
         </select>
       </span>
       <span class="datepicker__options-year-container" *ngIf="hasMultipleCalendarView">
         <select class="datepicker__container__select" (change)="selectCalendarView($event,true)">
-          <option *ngFor="let type of calendarType" [value]="type.value" [selected]="type.value === calendarView">
+          <option style="padding: 6px 0px;" *ngFor="let type of calendarType" [value]="type.value" [selected]="type.value === calendarView">
             {{ type.label }}
           </option>
         </select>
