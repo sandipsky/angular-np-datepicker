@@ -34,6 +34,7 @@ type DateFormatType = 'yyyy/mm/dd' | 'dd/mm/yyyy' | 'yyyy-mm-dd' | 'dd-mm-yyyy';
 type Language = 'en' | 'ne';
 type MonthDisplayType = 'default' | 'short';
 type DateIn = 'AD' | 'BS';
+type Mode = 'Calendar' | 'Datepicker';
 @Component({
   selector: 'np-datepicker, ne-datepicker',
   templateUrl: `ngx-nepali-datepicker.component.html`,
@@ -53,7 +54,7 @@ export class NgxNepaliDatepickerComponent
   @Input() isError = false;
   @Input() darkTheme = false;
   @Input() date!: string;
-  @Input() mode!: string;
+  @Input() mode: Mode = 'Datepicker';
   @Input() appendTime = false;
   @Input() maxDate!: Date;
   @Input() minDate!: Date;
@@ -62,10 +63,16 @@ export class NgxNepaliDatepickerComponent
   @Input() hasMultipleCalendarView = true;
   @Input() calendarView: string = "BS";
   @Input() showIcon: boolean = true;
+  @Input() readonly: boolean = false;
 
   @Output() dateChange: EventEmitter<string> = new EventEmitter();
   @Output() dateInBS: EventEmitter<string> = new EventEmitter();
   @Output() dateInAD: EventEmitter<string> = new EventEmitter();
+  @Output() onNext: EventEmitter<any> = new EventEmitter();
+  @Output() onPrev: EventEmitter<any> = new EventEmitter();
+  @Output() onSelectMonth: EventEmitter<any> = new EventEmitter();
+  @Output() onSelectYear: EventEmitter<any> = new EventEmitter();
+  @Output() onSelectCalendarType: EventEmitter<any> = new EventEmitter();
 
   public nepaliDateToday: DateObj = { day: 0, month: 0, year: 0 };
   public englishDateToday: DateObj = { day: 0, month: 0, year: 0 };
@@ -309,6 +316,7 @@ export class NgxNepaliDatepickerComponent
     }
     this.setEnglishCurrentDate();
     this.setCurrentMonthData();
+    this.onSelectYear.emit();
   }
 
   public selectMonth(e: any) {
@@ -340,6 +348,7 @@ export class NgxNepaliDatepickerComponent
     }
     this.setEnglishCurrentDate();
     this.setCurrentMonthData();
+    this.onSelectMonth.emit();
   }
 
   private resetCurrentMonthData() {
@@ -570,6 +579,7 @@ export class NgxNepaliDatepickerComponent
       this.selectedYear = this.currentDate.getFullYear();
     }
     this.setCurrentMonthData();
+    this.onPrev.emit();
   }
 
   public nextMonth() {
@@ -620,6 +630,7 @@ export class NgxNepaliDatepickerComponent
       this.selectedYear = this.currentDate.getFullYear();
     }
     this.setCurrentMonthData();
+    this.onNext.emit();
   }
 
   public toggleOpen() {
@@ -697,6 +708,7 @@ export class NgxNepaliDatepickerComponent
     }
     isSelect != undefined ? this.emitDate() : null;
     this.setCurrentMonthData();
+    this.onSelectCalendarType.emit();
   }
 
   private setEnglishCurrentDate() {

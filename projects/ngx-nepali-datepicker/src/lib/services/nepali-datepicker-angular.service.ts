@@ -1,13 +1,22 @@
 import { Injectable } from '@angular/core';
 import { NepaliDatepickerAngularPrivateService } from './nepali-datepicker-angular-private.service';
+import {
+  englishLeapMonths,
+  englishMonths,
+  nepaliMonths,
+} from '../constants/data';
 type DateFormat = 'yyyy/mm/dd' | 'dd/mm/yyyy' | 'yyyy-mm-dd' | 'dd-mm-yyyy';
 @Injectable({
   providedIn: 'root',
 })
 export class NgxNepaliDatepickerService {
+  nepaliMonths = nepaliMonths;
+  englishMonths = englishMonths;
+  englishLeapMonths = englishLeapMonths;
+
   constructor(
     private _datePicketService: NepaliDatepickerAngularPrivateService
-  ) {}
+  ) { }
 
   /**
    * @param dateInAD string value of AD date only
@@ -79,8 +88,18 @@ export class NgxNepaliDatepickerService {
     const year = today.getFullYear();
     const month = String(today.getMonth() + 1).padStart(2, '0'); // Months are zero-based
     const day = String(today.getDate()).padStart(2, '0');
-    const formattedDate = this.formatDate({day:Number(day), month:Number(month), year:Number(year)}, format);
+    const formattedDate = this.formatDate({ day: Number(day), month: Number(month), year: Number(year) }, format);
     return formattedDate;
+  }
+
+  getNumberofDaysInNepaliMonths(year: number, month: number) {
+    return (this.nepaliMonths[year - 2000][month] || 0);
+  }
+
+  getNumberofDaysInEnglishMonths(year: number, month: number) {
+    if (year % 4 === 0) {
+      return (this.englishMonths[month] || 0);
+    } else return (this.englishLeapMonths[month] || 0);
   }
 
   private zeroPad(num: number, places: number) {
