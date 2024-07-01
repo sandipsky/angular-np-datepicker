@@ -1,9 +1,11 @@
 .dp {
   width: 294px;
+  position: absolute;
 }
 
 .cal {
   width: 100%;
+  position: static;
 }
 
 .nepali-date-picker {
@@ -28,7 +30,6 @@
       border-radius: 6px;
       background: #fff;
       box-shadow: rgba(10, 10, 15, 0.2) 0px 7px 29px 0px;
-      position: absolute;
       z-index: 99999;
 
       &__select {

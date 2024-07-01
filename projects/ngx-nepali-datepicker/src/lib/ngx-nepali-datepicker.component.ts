@@ -49,7 +49,7 @@ export class NgxNepaliDatepickerComponent
   @Input()
   placeholder = 'Enter date';
   @Input()
-  language: Language = 'ne';
+  language: Language = 'en';
   @Input() dateIn: DateIn = 'BS';
   @Input() isError = false;
   @Input() darkTheme = false;
